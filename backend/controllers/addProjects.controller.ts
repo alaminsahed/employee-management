@@ -1,5 +1,6 @@
 import Projects from "../models/projectModel";
 import { Request, Response } from "express";
+import clientRedis from "../config/redisConfig";
 
 const addProjects = async (req: Request, res: Response): Promise<void> => {
   const { name, client, pm, status, duration } = req.body;
@@ -9,6 +10,8 @@ const addProjects = async (req: Request, res: Response): Promise<void> => {
     res.status(400).send("Project already exists");
     throw new Error("Project already exists");
   }
+
+  clientRedis.del("projects");
 
   const newProject = await Projects.create({
     name,

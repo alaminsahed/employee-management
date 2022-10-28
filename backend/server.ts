@@ -14,18 +14,11 @@ import { notFound } from "./middlewires/error";
 import imageUpload from "./routes/imageUpload.route";
 import path from "path";
 import { Server } from "socket.io";
-import * as redis from "redis";
-// import employee from "./routes/test/employee.route";
+import client from "./config/redisConfig";
 
 dotenv.config();
 connectDB();
 const dirname = path.resolve();
-
-export const client = redis.createClient({
-  url: "redis://127.0.0.1:6379",
-});
-
-client.on("error", (err) => console.log("Redis Client Error", err));
 
 const app: Application = express();
 
@@ -52,6 +45,8 @@ app.use("/api/v1/resetPassword", resetPassword);
 app.use("/uploads", express.static(path.join(dirname, "/uploads")));
 //test optimization
 //app.use("/api/v1/createEmployee", employee);
+
+client.connect();
 
 app.use(notFound);
 

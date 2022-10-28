@@ -1,19 +1,21 @@
 import Projects from "../models/projectModel";
 import { Request, Response } from "express";
-import { client } from "../server";
+import client from "../config/redisConfig";
 
 const allProjects = async (req: Request, res: Response): Promise<void> => {
+  console.log({ client });
   const cachedProjects = await client.get("projects");
   if (cachedProjects) {
     res.status(200).json(JSON.parse(cachedProjects));
+  } else {
+    const projects = await Projects.find({});
+    if (!projects) {
+      res.status(400).send("No projects found");
+      throw new Error("No projects found");
+    }
+    await client.set("projects", JSON.stringify(projects));
+    res.status(200).json(projects);
   }
-  const projects = await Projects.find({});
-  if (!projects) {
-    res.status(400).send("No projects found");
-    throw new Error("No projects found");
-  }
-  client.set("projects", JSON.stringify(projects));
-  res.status(200).json(projects);
 };
 
 const projectDeatils = async (req: Request, res: Response): Promise<void> => {
