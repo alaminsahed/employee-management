@@ -181,7 +181,8 @@ const DataTable = ({
                       </TableCell>
                       <TableCell align="center">{row.pm}</TableCell>
                       <TableCell align="center">
-                        {row.duration[0]}-{row.duration[1]}
+                        {row.duration[0].slice(0, 10)} TO{" "}
+                        {row.duration[1].slice(0, 10)}
                       </TableCell>
                     </Hidden>
                     {isAdmin() && (
