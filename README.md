@@ -90,7 +90,7 @@ npm run watch
 * Admin features short overview
 [Admin.webm](https://user-images.githubusercontent.com/57568263/205641831-dcfc940c-af77-4fbd-9866-94bc4c7307a9.webm)
 
-* Emolyee features short overview
+* Empolyee features short overview
 [Employee.webm](https://user-images.githubusercontent.com/57568263/205646130-8dce344c-ad40-404b-af19-53b3f4bc1d36.webm)
 
 ### Purpose:
