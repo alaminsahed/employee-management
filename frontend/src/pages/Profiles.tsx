@@ -1,9 +1,10 @@
-import React, { useEffect } from "react";
+import React, { Suspense, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-import DataTable from "../components/DataTable";
 import { isAdmin } from "../utils/auth";
+
+const DataTable = React.lazy(() => import("../components/DataTable"));
 
 const Profiles = ({
   isprofiles,
@@ -39,7 +40,9 @@ const Profiles = ({
   setIsProfiles(true);
   return (
     <div>
-      <DataTable customData={allProfiles} isprofiles={isprofiles} />
+      <Suspense fallback={<div>Loading...</div>}>
+        <DataTable customData={allProfiles} isprofiles={isprofiles} />
+      </Suspense>
     </div>
   );
 };

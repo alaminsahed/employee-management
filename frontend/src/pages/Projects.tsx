@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
+import React, { Suspense, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-import DataTable from "../components/DataTable";
 import { isLogin } from "../utils/auth";
-import Pagination from "../components/Pagination";
+
+const Pagination = React.lazy(() => import("../components/Pagination"));
+const DataTable = React.lazy(() => import("../components/DataTable"));
 
 const Projects = ({
   isprofiles,
@@ -14,7 +15,7 @@ const Projects = ({
   setIsProfiles: any;
 }) => {
   const navigate = useNavigate();
-  const [loading, setLoading] = React.useState(false);
+
   const [error, setError] = React.useState(null);
   const [response, setResponse] = React.useState([]);
   const [currentPage, setCurrentPages] = React.useState(1);
@@ -29,7 +30,6 @@ const Projects = ({
 
   const getProjectData = async () => {
     try {
-      setLoading(true);
       const res = await axios(
         `http://localhost:5000/api/v1/projects?currentPage=${currentPage}&currentLimit=${currentLimit}`
       );
@@ -42,7 +42,6 @@ const Projects = ({
     } catch (error: any) {
       setError(error);
     }
-    setLoading(false);
   };
 
   if (error) {
@@ -54,17 +53,13 @@ const Projects = ({
   setIsProfiles(false);
   return (
     <div>
-      {loading ? (
-        <h1>Loading...</h1>
-      ) : (
-        <>
-          <DataTable customData={customData} isprofiles={isprofiles} />
-          <Pagination
-            setCurrentPages={setCurrentPages}
-            currentPage={currentPage}
-          />
-        </>
-      )}
+      <Suspense fallback={<div>Loading...</div>}>
+        <DataTable customData={customData} isprofiles={isprofiles} />
+        <Pagination
+          setCurrentPages={setCurrentPages}
+          currentPage={currentPage}
+        />
+      </Suspense>
     </div>
   );
 };
