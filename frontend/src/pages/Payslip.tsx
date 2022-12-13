@@ -1,6 +1,7 @@
-import React, { useEffect } from "react";
+import React, { Suspense, useEffect } from "react";
 import { Box, Card, CardContent, Typography } from "@mui/material";
-import PdfDownloader from "../components/PdfDownloader";
+
+const PdfDownloader = React.lazy(() => import("../components/PdfDownloader"));
 
 const Payslip = () => {
   const [payslipData, setPayslipData] = React.useState<any>([]);
@@ -62,10 +63,12 @@ const Payslip = () => {
               marginRight: "20px",
             }}
           >
-            <PdfDownloader
-              downloadFileName="PayslipPdf"
-              rootElementId="payslipId"
-            />
+            <Suspense fallback={<div>Loading...</div>}>
+              <PdfDownloader
+                downloadFileName="PayslipPdf"
+                rootElementId="payslipId"
+              />
+            </Suspense>
           </Box>
         </Card>
       </Box>
