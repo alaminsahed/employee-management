@@ -3,16 +3,17 @@ import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 
-import Box from "@mui/material/Box";
-import Card from "@mui/material/Card";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
+import { Box, Card, Typography, Button } from "@mui/material";
 
-import { isLogin } from "../utils/auth";
+
+import { isLogin } from "../../../utils/auth";
+import { toast } from "react-toastify";
+
 
 const MyProfile = () => {
   const navigate = useNavigate();
-  const [profile, setProfile] = React.useState<any>({});
+  const [profile, setProfile] = React.useState < any > ({});
+
 
   const params = useParams();
   const profileId = params.id;
@@ -48,8 +49,8 @@ const MyProfile = () => {
       const data = await response.data;
 
       setProfile(data);
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      toast.error(error);
     }
   };
 
@@ -69,6 +70,7 @@ const MyProfile = () => {
     }
   };
 
+
   return (
     <div>
       <Box
@@ -78,20 +80,21 @@ const MyProfile = () => {
           justifyContent: "space-around",
         }}
       >
+
         {profileId ? (
-          <Typography variant="h3" sx={{ textAlign: "center", padding: 2 }}>
+          <Typography variant="h3" sx={{ textAlign: "center", padding: 2, fontFamily: "cursive" }}>
             Profile Details
           </Typography>
         ) : (
-          <Typography variant="h3" sx={{ textAlign: "center", padding: 2 }}>
+          <Typography variant="h3" sx={{ textAlign: "center", padding: 2, fontFamily: "cursive" }}>
             My Profile
           </Typography>
         )}
         {profileId ? (
           <div>
             <Button
-              color="primary"
-              variant="contained"
+              color="secondary"
+              variant="outlined"
               sx={{ height: "3rem", p: 2, mt: 2, color: "white", mr: 2 }}
               onClick={() => navigate(`/addEmployee/${profileId}`)}
             >
@@ -99,8 +102,8 @@ const MyProfile = () => {
             </Button>
 
             <Button
-              color="primary"
-              variant="contained"
+              color="error"
+              variant="outlined"
               sx={{ height: "3rem", p: 2, mt: 2, color: "white" }}
               onClick={() => handleProfileDelete(profileId)}
             >
@@ -111,46 +114,47 @@ const MyProfile = () => {
           <>
             <Button
               color="primary"
-              variant="contained"
-              sx={{ height: "3rem", p: 2, mt: 2, color: "white" }}
+              variant="outlined"
+              sx={{ height: "3rem", p: 2, mt: 2 }}
               onClick={() => navigate("/changePassword")}
             >
               Change Password
             </Button>
             <Button
-              color="primary"
-              variant="contained"
-              sx={{ height: "3rem", p: 2, mt: 2, color: "white" }}
+              color="secondary"
+              variant="outlined"
+              sx={{ height: "3rem", p: 2, mt: 2 }}
               onClick={() => navigate("/profileEdit")}
             >
               Profile Edit
             </Button>
             <Button
-              color="primary"
-              variant="contained"
-              sx={{ height: "3rem", p: 2, mt: 2, color: "white" }}
+              color="success"
+              variant="outlined"
+              sx={{ height: "3rem", p: 2, mt: 2 }}
               onClick={() => navigate(`/claimLeaveRequest/${profile._id}`)}
             >
               Claim Leave Request
             </Button>
             <Button
-              color="primary"
-              variant="contained"
-              sx={{ height: "3rem", p: 2, mt: 2, color: "white" }}
+              color="info"
+              variant="outlined"
+              sx={{ height: "3rem", p: 2, mt: 2 }}
               onClick={() => navigate("/leaveRequestStatus")}
             >
               Leave Request Status
             </Button>
             <Button
               color="primary"
-              variant="contained"
-              sx={{ height: "3rem", p: 2, mt: 2, color: "white" }}
+              variant="outlined"
+              sx={{ height: "3rem", p: 2, mt: 2 }}
               onClick={() => navigate("/payslip")}
             >
               Download Pay Slip
             </Button>
           </>
         )}
+
       </Box>
       <div>
         <Box>

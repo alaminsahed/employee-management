@@ -5,7 +5,7 @@ import Login from "./pages/shared/login/Login";
 import Profiles from "./pages/Profiles";
 import Projects from "./pages/Projects";
 import NavBar from "./components/NavBar";
-import MyProfile from "./pages/MyProfile";
+import MyProfile from "./pages/shared/profile/MyProfile";
 import MyProjects from "./pages/MyProjects";
 import AddProject from "./pages/AddProject";
 import AddEmployee from "./pages/AddEmployee";
