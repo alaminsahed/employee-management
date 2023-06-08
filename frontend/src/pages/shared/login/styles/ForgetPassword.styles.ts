@@ -1,6 +1,6 @@
 import { Paper } from "@mui/material";
 import { styled } from "@mui/system";
-import bgForgetPass from "../../assets/images/forget-pass.jpg";
+import bgForgetPass from "../../../../assets/images/forget-pass.jpg";
 
 export const StyledPaperMain = styled(Paper)(({ theme }) => ({
   height: "100vh",

@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Button, Box, Typography } from "@mui/material";
-import { StyledPaperMain } from "../../style/ForgetPassword.styles";
+import { StyledPaperMain } from "./styles/ForgetPassword.styles";
 import { LoginTextField } from "../../style/TextField.styles";
 import { toast } from "react-toastify";
 
