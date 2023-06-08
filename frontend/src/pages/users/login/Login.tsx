@@ -4,12 +4,14 @@ import Button from "@mui/material/Button";
 import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
 
-import axios from "axios";
 import React from "react";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
 
-import loginImage from "../assets/images/bg-login.jpg";
-import { LoginTextField } from "./style/TextField.styles";
+
+import loginImage from "../../../assets/images/bg-login.jpg";
+import { LoginTextField } from "../../style/TextField.styles";
 
 
 const Login = ({ socket }: any) => {
@@ -50,7 +52,9 @@ const Login = ({ socket }: any) => {
       })
       .catch((err: any) => {
         console.log(err.response);
-        alert(err.response.data);
+        toast.error(err.response.data);
+
+        //alert(err.response.data);
       });
   };
 
@@ -98,6 +102,7 @@ const Login = ({ socket }: any) => {
                 loginInputContainer.map((input, index) => {
                   return (
                     <LoginTextField
+                      key={index}
                       margin="normal"
                       required
                       fullWidth

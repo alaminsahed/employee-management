@@ -2,9 +2,8 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-import TextField from "@mui/material/TextField";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
+import { TextField, Box, Button, Paper } from "@mui/material";
+import { toast } from "react-toastify";
 
 const ChangePassword = () => {
   const [newPassword, setNewPassword] = React.useState("");
@@ -20,7 +19,7 @@ const ChangePassword = () => {
     if (newPassword === confirmPassword) {
       decoded.email ? forgetPassword() : changePassword();
     } else {
-      alert("Password does not match");
+      toast.error("Password does not match");
     }
   };
 
@@ -37,7 +36,7 @@ const ChangePassword = () => {
     );
     const data = await res.data;
 
-    alert(data.message);
+    toast(data.message);
     navigate("/myprofile");
   };
 
@@ -57,13 +56,14 @@ const ChangePassword = () => {
   };
 
   return (
-    <div
-      style={{
+    <Paper
+      sx={{
         height: "100vh",
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
+        backgroundColor: "linear-gradient(to bottom, #87CEFA, #1E90FF)"
       }}
     >
       <Box
@@ -100,7 +100,7 @@ const ChangePassword = () => {
           </Button>
         </form>
       </Box>
-    </div>
+    </Paper>
   );
 };
 

@@ -1,7 +1,10 @@
 import React from "react";
-import { Button, Box, Typography, TextField } from "@mui/material";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { Button, Box, Typography } from "@mui/material";
+import { StyledPaperMain } from "../../style/ForgetPassword.styles";
+import { LoginTextField } from "../../style/TextField.styles";
+import { toast } from "react-toastify";
 
 const ForgetPassword = () => {
   const navigate = useNavigate();
@@ -20,22 +23,15 @@ const ForgetPassword = () => {
           email: email,
         }
       );
-      const data = await res.data;
-      console.log(data);
+      await res.data;
+
     }
+    toast.success("Check your email for reset password link");
     navigate("/");
   };
 
   return (
-    <div
-      style={{
-        height: "100vh",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
+    <StyledPaperMain>
       <Box
         sx={{
           height: 400,
@@ -48,6 +44,7 @@ const ForgetPassword = () => {
           alignItems: "center",
           justifyContent: "center",
           borderRadius: 1,
+
         }}
       >
         <Typography component="h1" variant="h5">
@@ -55,7 +52,7 @@ const ForgetPassword = () => {
         </Typography>
 
         <Box component="form" onSubmit={onSubmit} noValidate sx={{ m: 2 }}>
-          <TextField
+          <LoginTextField
             margin="normal"
             required
             fullWidth
@@ -70,13 +67,13 @@ const ForgetPassword = () => {
             type="submit"
             fullWidth
             variant="contained"
-            sx={{ mt: 3, mb: 2 }}
+            sx={{ mt: 3, mb: 2, border: 1, borderColor: "white" }}
           >
             Submit
           </Button>
         </Box>
       </Box>
-    </div>
+    </StyledPaperMain>
   );
 };
 
