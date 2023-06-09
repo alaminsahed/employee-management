@@ -13,7 +13,7 @@ import NotFound from "./pages/NotFound";
 import ChangePassword from "./pages/shared/login/ChangePassword";
 import AddEmployeeForm from "./components/AddEmployeeForm";
 import Payslip from "./pages/Payslip";
-import EditMyProfile from "./pages/EditMyProfile";
+import EditMyProfile from "./pages/shared/profile/EditMyProfile";
 import ForgetPasswordVerify from "./pages/shared/login/ForgetPasswordVerify";
 import ForgetPassword from "./pages/shared/login/ForgetPassword";
 import { io } from "socket.io-client";

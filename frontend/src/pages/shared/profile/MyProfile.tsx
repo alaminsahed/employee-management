@@ -89,7 +89,7 @@ const MyProfile = () => {
         sx={{
           display: "flex",
           flexDirection: "row",
-          justifyContent: "space-around",
+          justifyContent: profileId ? "center" : "space-around",
         }}
       >
         {profileId ? (
@@ -97,9 +97,9 @@ const MyProfile = () => {
             <Button
               color="secondary"
               variant="outlined"
-              sx={{ height: "3rem", p: 2, mt: 2, color: "white", mr: 2 }}
+              sx={{ height: "3rem", p: 2, mt: 2, mr: 2 }}
               onClick={() => navigate(`/addEmployee/${profileId}`)}
-              className="animate__animated animate__bounce animate__delay-2s"
+              className="animate__animated animate__lightSpeedInRight animate__delay-2s"
             >
               Edit
             </Button>
@@ -107,8 +107,9 @@ const MyProfile = () => {
             <Button
               color="error"
               variant="outlined"
-              sx={{ height: "3rem", p: 2, mt: 2, color: "white" }}
+              sx={{ height: "3rem", p: 2, mt: 2 }}
               onClick={() => handleProfileDelete(profileId)}
+              className="animate__animated animate__lightSpeedInRight animate__delay-1s"
             >
               Delete
             </Button>
