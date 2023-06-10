@@ -111,9 +111,9 @@ const AddEmployeeInfo = ({
           </>
         ) : (
           <>
-            <h2 style={{ textAlign: "center" }}>
+            <Typography variant="h4" sx={{ textAlign: "center", fontFamily: "serif" }} >
               Add Employee's Personal Information
-            </h2>
+            </Typography>
           </>
         )}
         <Box sx={{ display: "flex", flexDirection: "column", justifyContent: "center", }}>
