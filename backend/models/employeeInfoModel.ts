@@ -22,7 +22,7 @@ const employeeInfoSchema = new mongoose.Schema(
     },
     phone: {
       type: Number,
-      required: true,
+      required: false,
     },
     address: {
       type: String,
@@ -37,25 +37,25 @@ const employeeInfoSchema = new mongoose.Schema(
     currentProjects: {
       projectName: {
         type: String,
-        required: true,
+        required: false,
       },
       responsiblity: {
         type: String,
-        required: true,
+        required: false,
       },
       status: {
         type: String,
-        required: true,
+        required: false,
       },
     },
     professionalInfo: {
       bonus: {
         type: Number,
-        required: true,
+        required: false,
       },
       totalLeave: {
         type: Number,
-        required: true,
+        required: false,
       },
       recentLeave: {
         type: Array,
@@ -66,11 +66,11 @@ const employeeInfoSchema = new mongoose.Schema(
     },
     designation: {
       type: String,
-      required: true,
+      required: false,
     },
     employeeStatus: {
       type: String,
-      required: true,
+      required: false,
     },
     leaveRequest: [
       {

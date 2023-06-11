@@ -1,32 +1,32 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Homepage from "./pages/Homepage";
-import Login from "./pages/Login";
+import Homepage from "./pages/shared/home/Homepage";
+import Login from "./pages/shared/login/Login";
 import Profiles from "./pages/Profiles";
 import Projects from "./pages/Projects";
 import NavBar from "./components/NavBar";
-import MyProfile from "./pages/MyProfile";
+import MyProfile from "./pages/shared/profile/MyProfile";
 import MyProjects from "./pages/MyProjects";
 import AddProject from "./pages/AddProject";
 import AddEmployee from "./pages/AddEmployee";
 import NotFound from "./pages/NotFound";
-import ChangePassword from "./pages/ChangePassword";
+import ChangePassword from "./pages/shared/login/ChangePassword";
 import AddEmployeeForm from "./components/AddEmployeeForm";
 import Payslip from "./pages/Payslip";
-import EditMyProfile from "./pages/EditMyProfile";
-import ForgetPasswordVerify from "./pages/ForgetPasswordVerify";
-import ForgetPassword from "./pages/ForgetPassword";
+import EditMyProfile from "./pages/shared/profile/EditMyProfile";
+import ForgetPasswordVerify from "./pages/shared/login/ForgetPasswordVerify";
+import ForgetPassword from "./pages/shared/login/ForgetPassword";
 import { io } from "socket.io-client";
 import AllLeaveRequest from "./pages/AllLeaveRequest";
-import ClaimLeaveRequest from "./pages/ClaimLeaveRequest";
+import ClaimLeaveRequest from "./pages/shared/leaveReq/ClaimLeaveRequest";
 import LeaveReqStatus from "./pages/LeaveReqStatus";
 import NoticeBoard from "./pages/NoticeBoard";
 import ShowNotice from "./pages/ShowNotice";
 
 function App() {
-  const [isprofiles, setIsProfiles] = React.useState<any>(true);
-  const [socket, setSocket] = useState<any>(null);
-  const [user, setUser] = useState<any>(null);
+  const [isprofiles, setIsProfiles] = React.useState < any > (true);
+  const [socket, setSocket] = useState < any > (null);
+  const [user, setUser] = useState < any > (null);
 
   useEffect(() => {
     setSocket(io("http://localhost:5000"));

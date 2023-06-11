@@ -7,6 +7,7 @@ import AddEmployeeInfo from "./AddEmployeeInfo";
 import AddEmployeeProfessional from "./AddEmployeeProfessional";
 import AddEmployeeProject from "./AddEmployeeProject";
 import ErrorInfo from "./ErrorInfo";
+import { toast } from "react-toastify";
 
 type employeeInfoType = {
   step: number;
@@ -37,34 +38,34 @@ const AddEmployeeForm = ({
   const params = useParams();
   const profileId = params.id;
 
-  const [joiningDateInfo, setJoiningDateInfo] = React.useState<Date | null>(
+  const [joiningDateInfo, setJoiningDateInfo] = React.useState < Date | null > (
     new Date()
   );
   const [projectList, setProjectList] = React.useState([]);
   const [employeeImg, setEmployeeImg] = React.useState("");
 
   const navigate = useNavigate();
-  const [employeeDetails, setEmployeeDeatils] = React.useState<
+  const [employeeDetails, setEmployeeDeatils] = React.useState <
     employeeInfoType | any
-  >({
-    step: 1,
-    name: "",
-    email: "",
-    password: "",
-    role: "",
-    phone: "",
-    address: "",
-    salary: "",
-    employeeStatus: "",
-    joiningDate: "",
-    projectName: "",
-    responsiblity: "",
-    status: "",
-    bonus: "",
-    totalLeave: "",
-    designation: "",
-    image: "",
-  });
+    > ({
+      step: 1,
+      name: "",
+      email: "",
+      password: "",
+      role: "",
+      phone: "",
+      address: "",
+      salary: "",
+      employeeStatus: "",
+      joiningDate: "",
+      projectName: "",
+      responsiblity: "",
+      status: "",
+      bonus: "",
+      totalLeave: "",
+      designation: "",
+      image: "",
+    });
 
   if (employeeImg) {
     employeeDetails.image = employeeImg;
@@ -174,7 +175,7 @@ const AddEmployeeForm = ({
     } catch (error) {
       console.log(error);
     }
-    profileId ? getProfile() : console.log("no profile id");
+    profileId ? getProfile() : console.log("No profile id available");
     myProfileUpdate ? fecthMyProfileData() : console.log("no update");
   }, []);
 
