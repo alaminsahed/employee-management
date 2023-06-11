@@ -17,7 +17,7 @@ import EditMyProfile from "./pages/shared/profile/EditMyProfile";
 import ForgetPasswordVerify from "./pages/shared/login/ForgetPasswordVerify";
 import ForgetPassword from "./pages/shared/login/ForgetPassword";
 import { io } from "socket.io-client";
-import AllLeaveRequest from "./pages/AllLeaveRequest";
+import AllLeaveRequest from "./pages/admin/AllLeaveRequest";
 import ClaimLeaveRequest from "./pages/shared/leaveReq/ClaimLeaveRequest";
 import LeaveReqStatus from "./pages/shared/leaveReq/LeaveReqStatus";
 import NoticeBoard from "./pages/NoticeBoard";

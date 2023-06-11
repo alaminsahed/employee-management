@@ -1,8 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import {
   Box,
   Button,
+  Pagination,
   Paper,
   Table,
   TableBody,
@@ -14,7 +15,10 @@ import {
 } from "@mui/material";
 
 const AllLeaveRequest = () => {
-  const [allLeaveRequest, setAllLeaveRequest] = React.useState<any>([]);
+  const [allLeaveRequest, setAllLeaveRequest] = useState < any > ([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(20);
+
 
   const user: any = localStorage.getItem("user");
   const userData = JSON.parse(user)._id;
@@ -62,6 +66,17 @@ const AllLeaveRequest = () => {
     }
   };
 
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = allLeaveRequest.slice(indexOfFirstPost, indexOfLastPost);
+  const totalPosts = allLeaveRequest.length;
+  const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
+
+  const pageNumbers: any = [];
+  for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
+    pageNumbers.push(i);
+  }
+
   return (
     <Box sx={{ m: 2 }}>
       <Box
@@ -102,7 +117,7 @@ const AllLeaveRequest = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {allLeaveRequest.map((row: any) => (
+            {currentPosts?.map((row: any) => (
               <TableRow
                 key={row._id}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
@@ -122,7 +137,7 @@ const AllLeaveRequest = () => {
 
                   <TableCell align="center">{row.leaveReason}</TableCell>
                   {row.leaveStatus === "Pending" &&
-                  row.employee._id !== userData ? (
+                    row.employee._id !== userData ? (
                     <>
                       <TableCell align="right">
                         <Button
@@ -167,6 +182,7 @@ const AllLeaveRequest = () => {
           </TableBody>
         </Table>
       </TableContainer>
+      <Pagination count={pageNumbers.length} onChange={(e, value) => paginate(value)} />
     </Box>
   );
 };
