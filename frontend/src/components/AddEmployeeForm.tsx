@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
-import NotFound from "../pages/NotFound";
+import NotFound from "../pages/shared/NotFound/NotFound";
 import AddEmployeeInfo from "./AddEmployeeInfo";
 import AddEmployeeProfessional from "./AddEmployeeProfessional";
 import AddEmployeeProject from "./AddEmployeeProject";

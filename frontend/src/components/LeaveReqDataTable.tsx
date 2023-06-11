@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import {
   Box,
   Paper,
@@ -8,11 +9,14 @@ import {
   TableHead,
   TableRow,
   Typography,
+  Pagination
 } from "@mui/material";
-import React from "react";
 
 const LeaveReqDataTable = ({ allLeaveRequest }: any) => {
-  const [leaveData, setLeaveData] = React.useState<any>([]);
+  const [leaveData, setLeaveData] = useState < any > ([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = React.useState(5);
+
 
   React.useEffect(() => {
     const user = localStorage.getItem("user");
@@ -24,6 +28,17 @@ const LeaveReqDataTable = ({ allLeaveRequest }: any) => {
       setLeaveData(data);
     }
   }, [allLeaveRequest]);
+
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = leaveData.slice(indexOfFirstPost, indexOfLastPost);
+  const totalPosts = leaveData.length;
+  const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
+
+  const pageNumbers: any = [];
+  for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
+    pageNumbers.push(i);
+  }
 
   return (
     <Box sx={{ m: 2 }}>
@@ -54,7 +69,7 @@ const LeaveReqDataTable = ({ allLeaveRequest }: any) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {leaveData.map((row: any) => (
+            {currentPosts.length ? currentPosts.map((row: any) => (
               <TableRow
                 key={row._id}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
@@ -72,9 +87,9 @@ const LeaveReqDataTable = ({ allLeaveRequest }: any) => {
                     align="center"
                     style={{
                       backgroundColor:
-                        row.leaveStatus === "rejected" ? "red" : "inherit",
+                        row.leaveStatus === "Rejected" ? "red" : row.leaveStatus === "Pending" ? "wheat" : "green",
                       color:
-                        row.employeeStatus === "rejected" ? "white" : "inherit",
+                        row.employeeStatus === "Rejected" ? "white" : "inherit",
                       borderRadius: "5px",
                     }}
                   >
@@ -82,10 +97,11 @@ const LeaveReqDataTable = ({ allLeaveRequest }: any) => {
                   </TableCell>
                 </>
               </TableRow>
-            ))}
+            )) : <Box sx={{ width: "100vh", textAlign: "center" }}>No Data Available</Box>}
           </TableBody>
         </Table>
       </TableContainer>
+      <Pagination count={pageNumbers.length} onChange={(e, page) => paginate(page)} />
     </Box>
   );
 };

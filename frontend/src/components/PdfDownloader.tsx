@@ -8,8 +8,12 @@ const PdfDownloader = ({ rootElementId, downloadFileName }: any) => {
     const input = document.getElementById(rootElementId);
     html2canvas(input as any).then((canvas) => {
       const imgData = canvas.toDataURL("image/png");
-      const pdf: any = new jsPDF("p", "pt", "a4");
-      pdf.addImage(imgData, "JPEG", 0, 0);
+      const pdf: any = new jsPDF({
+        orientation: "landscape",
+        unit: "px",
+        format: [canvas.width, canvas.height],
+      });
+      pdf.addImage(imgData, "JPEG", 0, 0, canvas.width, canvas.height);
       pdf.save(`${downloadFileName}.pdf`);
     });
   };

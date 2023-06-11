@@ -2,9 +2,9 @@ import React, { Suspense, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-import { isAdmin } from "../utils/auth";
+import { isAdmin } from "../../../utils/auth";
 
-const DataTable = React.lazy(() => import("../components/DataTable"));
+const DataTable = React.lazy(() => import("../../../components/DataTable"));
 
 const Profiles = ({
   isprofiles,
@@ -14,7 +14,7 @@ const Profiles = ({
   setIsProfiles: any;
 }) => {
   const navigate = useNavigate();
-  const [allProfiles, setAllProfiles] = React.useState<any>([]);
+  const [allProfiles, setAllProfiles] = React.useState < any > ([]);
 
   useEffect(() => {
     if (!isAdmin()) {

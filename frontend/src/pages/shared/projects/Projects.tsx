@@ -2,10 +2,9 @@ import React, { Suspense, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-import { isLogin } from "../utils/auth";
+import { isLogin } from "../../../utils/auth";
 
-const Pagination = React.lazy(() => import("../components/Pagination"));
-const DataTable = React.lazy(() => import("../components/DataTable"));
+const DataTable = React.lazy(() => import("../../../components/DataTable"));
 
 const Projects = ({
   isprofiles,
@@ -55,10 +54,6 @@ const Projects = ({
     <div>
       <Suspense fallback={<div>Loading...</div>}>
         <DataTable customData={customData} isprofiles={isprofiles} />
-        <Pagination
-          setCurrentPages={setCurrentPages}
-          currentPage={currentPage}
-        />
       </Suspense>
     </div>
   );

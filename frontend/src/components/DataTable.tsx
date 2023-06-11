@@ -1,15 +1,9 @@
 import { Box, Button } from "@mui/material";
-import Hidden from "@mui/material/Hidden";
-import Paper from "@mui/material/Paper";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
+import { Hidden, Pagination, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
+
 
 import axios from "axios";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { isAdmin, isLogin } from "../utils/auth";
@@ -24,7 +18,10 @@ const DataTable = ({
   customData: any;
   isprofiles: any;
 }) => {
-  const [searchQuery, setSearchQuery] = React.useState<searchData>("");
+  const [searchQuery, setSearchQuery] = useState < searchData > ("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(20);
+
 
   const navigate = useNavigate();
 
@@ -62,6 +59,18 @@ const DataTable = ({
       window.location.reload();
     }
   };
+
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = filterData ? filterData.slice(indexOfFirstPost, indexOfLastPost) : customData.slice(indexOfFirstPost, indexOfLastPost);
+  const totalPosts = filterData ? filterData.length : customData.length;
+  const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
+
+  const pageNumbers: any = [];
+  for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
+    pageNumbers.push(i);
+  }
+
 
   return (
     <Box sx={{ m: 2 }}>
@@ -120,7 +129,7 @@ const DataTable = ({
             </TableRow>
           </TableHead>
           <TableBody>
-            {(searchQuery ? filterData : customData).map((row: any) => (
+            {currentPosts?.map((row: any) => (
               <TableRow
                 key={row.name}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
@@ -209,6 +218,7 @@ const DataTable = ({
           </TableBody>
         </Table>
       </TableContainer>
+      <Pagination count={pageNumbers.length} onChange={(e, value) => paginate(value)} />
     </Box>
   );
 };
