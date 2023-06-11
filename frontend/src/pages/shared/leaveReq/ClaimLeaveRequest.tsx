@@ -6,6 +6,7 @@ import { Box, Button, Grid, InputLabel, MenuItem, Select, TextField, Typography,
 import { DateRange } from "@mui/x-date-pickers-pro/DateRangePicker";
 
 import { Dayjs } from "dayjs";
+import { toast } from "react-toastify";
 import DateRangePick from "../../../components/DateRangePick";
 import animatedPlane from "../../../assets/images/paper-plane.gif";
 
@@ -51,7 +52,7 @@ const ClaimLeaveRequest = () => {
           },
         }
       );
-      alert("Leave Request Submitted");
+      toast.success("Leave Request Submitted");
       navigate("/leaveRequestStatus");
     } catch (error) {
       console.log(error);
@@ -102,6 +103,7 @@ const ClaimLeaveRequest = () => {
           sx={{
             backgroundColor: "#A5C9CA",
             p: 2,
+            m: 2,
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",

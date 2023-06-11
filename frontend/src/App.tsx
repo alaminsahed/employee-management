@@ -19,7 +19,7 @@ import ForgetPassword from "./pages/shared/login/ForgetPassword";
 import { io } from "socket.io-client";
 import AllLeaveRequest from "./pages/AllLeaveRequest";
 import ClaimLeaveRequest from "./pages/shared/leaveReq/ClaimLeaveRequest";
-import LeaveReqStatus from "./pages/LeaveReqStatus";
+import LeaveReqStatus from "./pages/shared/leaveReq/LeaveReqStatus";
 import NoticeBoard from "./pages/NoticeBoard";
 import ShowNotice from "./pages/ShowNotice";
 

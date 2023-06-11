@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import axios from "axios";
 
-import LeaveReqDataTable from "../components/LeaveReqDataTable";
+import LeaveReqDataTable from "../../../components/LeaveReqDataTable";
 
 const LeaveReqStatus = () => {
-  const [allLeaveRequest, setAllLeaveRequest] = React.useState<any>([]);
+  const [allLeaveRequest, setAllLeaveRequest] = React.useState < any > ([]);
 
   useEffect(() => {
     fetchAllLeaveRequest();
