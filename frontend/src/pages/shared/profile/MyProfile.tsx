@@ -74,7 +74,7 @@ const MyProfile = () => {
   };
 
   return (
-    <div>
+    <>
       {profileId ? (
         <Typography variant="h3" sx={{ textAlign: "center", padding: 2, fontFamily: "cursive", xs: { fontSize: "1rem" } }}>
           Profile Details
@@ -121,7 +121,7 @@ const MyProfile = () => {
               variant="outlined"
               sx={{ height: "3rem", p: 2, m: 1 }}
               onClick={() => navigate("/changePassword")}
-              className="animate__animated animate__lightSpeedInRight animate__delay-4s"
+              className="animate__animated animate__lightSpeedInRight animate__delay-2s"
             >
               Change Password
             </Button>
@@ -130,7 +130,7 @@ const MyProfile = () => {
               variant="outlined"
               sx={{ height: "3rem", p: 2, m: 1 }}
               onClick={() => navigate("/profileEdit")}
-              className="animate__animated animate__lightSpeedInRight animate__delay-3s"
+              className="animate__animated animate__lightSpeedInRight animate__delay-2s"
             >
               Profile Edit
             </Button>
@@ -139,7 +139,7 @@ const MyProfile = () => {
               variant="outlined"
               sx={{ height: "3rem", p: 2, m: 1 }}
               onClick={() => navigate(`/claimLeaveRequest/${profile._id}`)}
-              className="animate__animated animate__lightSpeedInRight animate__delay-2s"
+              className="animate__animated animate__lightSpeedInRight animate__delay-1s"
             >
               Claim Leave
             </Button>
@@ -260,7 +260,7 @@ const MyProfile = () => {
         </Card>
       </Box>
 
-    </div >
+    </ >
   );
 };
 
