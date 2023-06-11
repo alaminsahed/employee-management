@@ -15,9 +15,9 @@ import { Dayjs } from "dayjs";
 import * as yup from "yup";
 import { useFormik } from "formik";
 
-import "./style/AddProject.css";
-import { isAdmin } from "../utils/auth";
-import DateRangePick from "../components/DateRangePick";
+import "./styles/AddProject.css";
+import { isAdmin } from "../../../utils/auth";
+import DateRangePick from "../../../components/DateRangePick";
 
 const validationSchema = yup.object({
   name: yup.string().required("Name is required"),
@@ -30,10 +30,10 @@ const AddProject = () => {
   let params = useParams();
   const projectId = params.id;
 
-  const [ProjectDurationValue, setProjectDurationValue] = React.useState<
-    DateRange<Dayjs>
-  >([null, null]);
-  const [pm, setPm] = React.useState<any>([]);
+  const [ProjectDurationValue, setProjectDurationValue] = React.useState <
+    DateRange < Dayjs >
+  > ([null, null]);
+  const [pm, setPm] = React.useState < any > ([]);
   const navigate = useNavigate();
 
   const formik = useFormik({
