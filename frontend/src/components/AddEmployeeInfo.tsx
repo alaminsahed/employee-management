@@ -100,6 +100,7 @@ const AddEmployeeInfo = ({
           p: 2,
           borderRadius: 2,
           boxShadow: 3,
+          m: 2,
 
         }}
       >
