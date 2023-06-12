@@ -1,6 +1,7 @@
 import React from "react";
-import { Box, Button, TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { Box, Button, TextField, Typography } from "@mui/material";
+import bgImage from "../../../assets/images/bg-notice.jpg";
 import axios from "axios";
 
 const NoticeBoard = () => {
@@ -61,13 +62,14 @@ const NoticeBoard = () => {
   };
 
   return (
-    <div
-      style={{
+    <Box
+      sx={{
         height: "100vh",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
+        backgroundImage: `url(${bgImage})`,
       }}
     >
       <Box
@@ -84,6 +86,12 @@ const NoticeBoard = () => {
           transform: "translate(-50, -50)",
         }}
       >
+        <Box>
+          <Typography sx={{ color: "red", p: 1 }}>
+            <b>Instructions: </b><br />
+            1. Please fill in the <b>Receiver Email Address</b> to only send the notice to that particular email address. <br />
+            2. If you want to send notice for all users, then please keep the <b>Receiver Email Address</b> blank.         </Typography>
+        </Box>
         <Box sx={{ textAlign: "center", color: "#00005C", marginBottom: 2 }}>
           <h1>Notice</h1>
         </Box>
@@ -140,7 +148,7 @@ const NoticeBoard = () => {
           </Button>
         </form>
       </Box>
-    </div>
+    </Box>
   );
 };
 
