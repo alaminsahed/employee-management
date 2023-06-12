@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import axios from "axios";
-import { Box } from "@mui/material";
+import { Grid, Card, Avatar } from "@mui/material";
+import { deepOrange } from '@mui/material/colors';
+
 
 const ShowNotice = () => {
   const [showNotice, setShowNotice] = React.useState([]);
@@ -31,31 +33,26 @@ const ShowNotice = () => {
     <div>
       {sortedData.map((notice: any) => {
         return (
-          <Box
-            sx={{
-              maxHeight: "10rem",
-              bgcolor: "#03fca9",
-              textAlign: "center",
-              borderRadius: 2,
-              m: 2,
-              p: 2,
-              color: "black",
-              borderStyle: "solid",
-              borderColor: "#c5ded7",
-              maxWidth: "50rem",
-              marginLeft: "30rem",
-            }}
-          >
-            <Box>
-              <h3>Subject: {notice.noticeTitle}</h3>
-              <p>{notice.noticeBody}</p>
-              <p>{notice.noticeFile}</p>
-              <br />
-              <hr />
-              <br />
-              <b>Date: {notice.noticeDate.slice(0, 10)}</b>
-            </Box>
-          </Box>
+          <Card sx={{
+            display: "flex", textAlign: "center", m: 1, cursor: "pointer", transition: "transform 0.2s ease-in-out",
+            "&:hover": {
+              transform: "scale(1.05)",
+            }
+          }}>
+            <Grid container sx={{ width: "100vh" }}>
+              <Grid item md={4} xs={4} lg={4} sx={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", p: 2 }}>
+                <Avatar sx={{ width: 56, height: 56, bgcolor: deepOrange[500] }}>ADMIN</Avatar>
+              </Grid>
+              <Grid item md={4} xs={4} lg={4} sx={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", p: 2, fontFamily: "serif" }}>
+                <h3>Title: {notice.noticeTitle}</h3>
+                <p>{notice.noticeBody}</p>
+              </Grid>
+              <Grid item md={4} xs={4} lg={4} sx={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", p: 2 }}>
+                <p>{notice.noticeFile}</p>
+                <b>Date: {notice.noticeDate.slice(0, 10)}</b>
+              </Grid>
+            </Grid>
+          </Card>
         );
       })}
     </div>
