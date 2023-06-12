@@ -73,7 +73,7 @@ const AddEmployeeInfo = ({
           },
         }
       );
-      toast.error(updateData.data.message);
+      toast(updateData.data.message);
       navigate("/myprofile");
     } catch (error) {
       console.log(error);
@@ -94,7 +94,7 @@ const AddEmployeeInfo = ({
     >
       <Box
         sx={{
-          height: myProfileUpdate ? '50%' : '100%',
+          height: myProfileUpdate ? '55%' : '100%',
           width: "50%",
           backgroundColor: "#FFFFFF",
           p: 2,
