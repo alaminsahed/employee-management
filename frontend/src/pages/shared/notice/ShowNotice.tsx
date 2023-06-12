@@ -31,9 +31,9 @@ const ShowNotice = () => {
   });
   return (
     <div>
-      {sortedData.map((notice: any) => {
+      {sortedData.map((notice: any, index: any) => {
         return (
-          <Card sx={{
+          <Card key={index} sx={{
             display: "flex", textAlign: "center", m: 1, cursor: "pointer", transition: "transform 0.2s ease-in-out",
             "&:hover": {
               transform: "scale(1.05)",

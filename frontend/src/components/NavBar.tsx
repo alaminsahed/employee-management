@@ -62,12 +62,12 @@ const ResponsiveAppBar = ({ socket }: any) => {
 
   const settings = ["Logout"];
 
-  const [anchorElNav, setAnchorElNav] = React.useState<
+  const [anchorElNav, setAnchorElNav] = React.useState <
     null | HTMLElement | any
-  >(null);
-  const [anchorElUser, setAnchorElUser] = React.useState<
+    > (null);
+  const [anchorElUser, setAnchorElUser] = React.useState <
     null | HTMLElement | any
-  >(null);
+    > (null);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement | any>) => {
     setAnchorElNav(event.currentTarget);

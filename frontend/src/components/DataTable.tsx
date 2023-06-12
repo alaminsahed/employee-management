@@ -20,7 +20,7 @@ const DataTable = ({
 }) => {
   const [searchQuery, setSearchQuery] = useState < searchData > ("");
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage] = useState(20);
+  const [postsPerPage] = useState(10);
 
 
   const navigate = useNavigate();
