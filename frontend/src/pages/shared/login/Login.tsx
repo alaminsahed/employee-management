@@ -1,5 +1,4 @@
-import React from "react";
-import axios from "axios";
+import React, { useEffect, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
 import { Paper, Grid, Box, Button, Link, Typography } from "@mui/material";
@@ -7,51 +6,43 @@ import { Paper, Grid, Box, Button, Link, Typography } from "@mui/material";
 
 import loginImage from "../../../assets/images/bg-login.jpg";
 import { LoginTextField } from "../../style/TextField.styles";
+import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
+import { postLogin } from "../../../redux/features/auth/loginSlice";
 
 
 const Login = ({ socket }: any) => {
   const [email, setEmail] = React.useState(null);
   const [password, setPassword] = React.useState("");
-  const [error, setError] = React.useState(false);
 
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+
+  const { token, employeeExists } = useAppSelector((state: any) => state.userLogin);
 
   const loginInputContainer = [
     { name: "email", label: "Email Address", type: "email", value: email, onChange: (e: any) => setEmail(e.target.value), autoComplete: "email", autoFocus: true },
     { name: "password", label: "Password", type: "password", value: password, onChange: (e: any) => setPassword(e.target.value), autoComplete: "current-password", autoFocus: false }
   ]
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement> | any) => {
+
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement> | any) => {
     e.preventDefault();
-
-    postData();
+    await dispatch(postLogin({ email, password }));
   };
 
-  const postData = () => {
-    axios
-      .post("http://localhost:5000/api/v1/login", {
-        email: email,
-        password: password,
-      })
-      .then((res: any) => {
-        const { employeeExists } = res.data;
-
-        socket?.emit("newUser", employeeExists.name);
-        localStorage.setItem("token", res.data.token);
-        localStorage.setItem("user", JSON.stringify(res.data.employeeExists));
-        if (res.data.employeeExists.employeeStatus === "deactive") {
-          alert("Your account is deactivated");
-          return;
-        }
+  useEffect(() => {
+    if (token) {
+      socket?.emit("newUser", employeeExists.name);
+      if (employeeExists.employeeStatus === "deactive") {
+        alert("Your account is deactivated");
+        return;
+      }
+      else {
         navigate("/home");
-      })
-      .catch((err: any) => {
-        console.log(err.response);
-        toast.error(err.response.data);
+      }
+    }
+  }, [token]);
 
-        //alert(err.response.data);
-      });
-  };
 
   return (
     <Grid container component={Paper} sx={{ height: "100vh" }}>

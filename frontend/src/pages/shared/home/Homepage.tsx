@@ -18,10 +18,10 @@ const Homepage = () => {
 
   return (
     <Grid container component={Paper}>
-      <Grid md={6}>
+      <Grid item md={6}>
         <img src={HomepageImage} alt="homepage" style={{ width: "80%", height: "80%" }} />
       </Grid>
-      <Grid md={6} sx={{
+      <Grid item md={6} sx={{
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
