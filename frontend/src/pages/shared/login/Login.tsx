@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
 import { Paper, Grid, Box, Button, Link, Typography } from "@mui/material";
@@ -13,11 +13,13 @@ import { postLogin } from "../../../redux/features/auth/loginSlice";
 const Login = ({ socket }: any) => {
   const [email, setEmail] = React.useState(null);
   const [password, setPassword] = React.useState("");
+  const [loginInfo, setLoginInfo] = React.useState();
 
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  const { token, employeeExists } = useAppSelector((state: any) => state.userLogin);
+  const { token, employeeExists, error } = useAppSelector((state: any) => state.userLogin);
+
 
   const loginInputContainer = [
     { name: "email", label: "Email Address", type: "email", value: email, onChange: (e: any) => setEmail(e.target.value), autoComplete: "email", autoFocus: true },
@@ -25,22 +27,33 @@ const Login = ({ socket }: any) => {
   ]
 
 
+
+
   const onSubmit = async (e: React.FormEvent<HTMLFormElement> | any) => {
     e.preventDefault();
+    console.log("loginInfo", e.target.name, e.target.value);
     await dispatch(postLogin({ email, password }));
+    notify();
   };
 
-  useEffect(() => {
-    if (token) {
-      socket?.emit("newUser", employeeExists.name);
-      if (employeeExists.employeeStatus === "deactive") {
-        alert("Your account is deactivated");
-        return;
-      }
-      else {
-        navigate("/home");
-      }
+  const notify = () => {
+    if (error) {
+      toast.error(error);
     }
+    if (employeeExists.employeeStatus === "deactive") {
+      toast.error("Your account is inactive. Please contact admin");
+    }
+  }
+
+
+
+
+  useEffect(() => {
+    if (token && employeeExists.employeeStatus === "active") {
+      socket?.emit("newUser", employeeExists.name);
+      navigate("/home");
+    }
+
   }, [token]);
 
 
