@@ -46,6 +46,7 @@ const loginSlice: any = createSlice({
       state.isAdmin = action.payload?.employeeExists?.role;
       state.token = action.payload.token;
       state.employeeExists = action.payload.employeeExists;
+      state.error = null;
     },
     [postLogin.rejected]: (state, action) => {
       state.loading = false;

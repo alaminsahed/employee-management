@@ -31,21 +31,8 @@ const Login = ({ socket }: any) => {
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement> | any) => {
     e.preventDefault();
-    console.log("loginInfo", e.target.name, e.target.value);
     await dispatch(postLogin({ email, password }));
-    notify();
   };
-
-  const notify = () => {
-    if (error) {
-      toast.error(error);
-    }
-    if (employeeExists.employeeStatus === "deactive") {
-      toast.error("Your account is inactive. Please contact admin");
-    }
-  }
-
-
 
 
   useEffect(() => {
@@ -53,8 +40,14 @@ const Login = ({ socket }: any) => {
       socket?.emit("newUser", employeeExists.name);
       navigate("/home");
     }
+    if (error) {
+      toast.error(error);
+    }
+    if (employeeExists.employeeStatus === "deactive") {
+      toast.error("Your account is inactive. Please contact admin");
+    }
 
-  }, [token]);
+  }, [token, error]);
 
 
   return (
