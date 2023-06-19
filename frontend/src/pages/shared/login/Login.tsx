@@ -13,7 +13,6 @@ import { postLogin } from "../../../redux/features/auth/loginSlice";
 const Login = ({ socket }: any) => {
   const [email, setEmail] = React.useState(null);
   const [password, setPassword] = React.useState("");
-  const [loginInfo, setLoginInfo] = React.useState();
 
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
