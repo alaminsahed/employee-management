@@ -90,6 +90,12 @@ const ResponsiveAppBar = ({ socket }: any) => {
     window.location.href = "/";
   };
   if (["/"].includes(location.pathname)) return null;
+
+  const userString = localStorage.getItem("user") ?? "{}";
+  const user = JSON.parse(userString);
+  const userName = user.name;
+
+
   return (
     <AppBar position="static">
       <MyHeader>
@@ -211,7 +217,7 @@ const ResponsiveAppBar = ({ socket }: any) => {
                 <Tooltip title="Open settings">
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                     <Avatar
-                      alt="Remy Sharp"
+                      alt={userName}
                       src="/static/images/avatar/2.jpg"
                     />
                   </IconButton>
