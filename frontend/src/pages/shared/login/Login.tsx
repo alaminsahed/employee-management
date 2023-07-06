@@ -12,7 +12,7 @@ import { LoginTextField } from "../../style/TextField.styles";
 const Login = ({ socket }: any) => {
   const [email, setEmail] = React.useState(null);
   const [password, setPassword] = React.useState("");
-  const [error, setError] = React.useState(false);
+
 
   const navigate = useNavigate();
 
@@ -107,7 +107,6 @@ const Login = ({ socket }: any) => {
                       onChange={input.onChange}
                       autoComplete={input.autoComplete}
                       autoFocus={input.autoFocus}
-
                     />
                   )
                 })
