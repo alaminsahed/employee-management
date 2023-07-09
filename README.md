@@ -1,4 +1,4 @@
-# Employee Managment System
+# Employee Management System
 
 ### Technology:
 
